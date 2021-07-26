@@ -1,5 +1,5 @@
-# border_traders_management_system it's final project idea or topic
-Techno : 
+# boarder_traders_management_system it's final project topic
+*Technology 
 Python3 
-frame work FastApi && react js 
+Framework FastApi && react js 
 DB mysql
