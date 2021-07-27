@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.core import config, tasks
+
 from app.api.routes import auth as auth_api_router
 
 def get_application():
-	app = FastAPI(title="Kona", version="1.0.0")
+	app = FastAPI(title=config.PROJECT_NAME, version=config.VERSION)
 	
 	app.add_middleware(
 		CORSMiddleware,
@@ -13,6 +15,8 @@ def get_application():
 		allow_methods=["*"],
 		allow_headers=["*"]
 	)
+	app.add_event_handler("startup", tasks.create_start_app_handler(app))
+	app.add_event_handler("shutdown", tasks.create_start_app_handler(app))
 	
 	app.include_router(auth_api_router, prefix="/api")
 	
